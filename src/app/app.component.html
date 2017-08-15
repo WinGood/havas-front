@@ -1,21 +1,170 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojREQwMDMxO30NCgkuc3Qxe2ZpbGw6I0MzMDAyRjt9DQoJLnN0MntmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMTI1LDMwIDEyNSwzMCAxMjUsMzAgMzEuOSw2My4yIDQ2LjEsMTg2LjMgMTI1LDIzMCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAJIi8+DQoJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSIxMjUsMzAgMTI1LDUyLjIgMTI1LDUyLjEgMTI1LDE1My40IDEyNSwxNTMuNCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAxMjUsMzAgCSIvPg0KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQ0KCQlMMTI1LDUyLjF6IE0xNDIsMTM1LjRIMTA4bDE3LTQwLjlMMTQyLDEzNS40eiIvPg0KPC9nPg0KPC9zdmc+DQo=">
+<!--<router-outlet></router-outlet>-->
+<div class="welcomePage" *ngIf="currentPageIndex === 0">
+  <div class="welcomePage__column">
+    <div class="welcomePage__columnTop welcomePage__columnTop--alignBottom">
+      <h1>What type<br>of diabetes<br>patients do<br>you see?</h1>
+    </div>
+    <div class="welcomePage__columnBottom">
+      <p class="big-text">
+        In a picture quiz format, clinicians are asked to select patients that
+        are typical of their practice. More than one selection is allowed. After the interaction clinicians can compare their results with those of their colleagues.
+      </p>
+    </div>
+  </div>
+  <div class="dashed-delimiter"></div>
+  <div class="welcomePage__column">
+    <div class="welcomePage__columnTop"></div>
+    <div class="welcomePage__columnBottom">
+      <h3>How the game works</h3>
+      <p>
+        Clinicians are asked to touch the screen to start the game. They are then shown images of three di erent patients whose speci c clinical characteristics are provided. This clinician is asked to tap on the faces of patients that are typical of those found in their clinic’s patient population.
+      </p>
+      <p>
+        After completing the screens, all the faces selected appear
+        on a screen. A diversity score is supplied and whatever their  nal score, each participant is reminded that unlike controlled clinical trials in which patients are carefully  ltered, real life studies obtain results from populations that re ect those found in everyday clinical practice.
+      </p>
+    </div>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="http://angularjs.blogspot.ca/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="pageContainer pageContainer--briefing pageContainer--withGameScore" *ngIf="currentPageIndex === 1">
+  <div class="pageContainer__header">
+    <hr class="horizontalDottedDelimiter" />
+  </div>
+  <div class="pageContainer__content">
+    <div class="portraitRow portraitRow--first">
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+    </div>
+    <div class="portraitRow portraitRow--second">
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+    </div>
+    <div class="portraitRow portraitRow--third">
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+      <div class="portraitRow__col"
+           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+    </div>
+    <div class="circleWrapper">
+      <div class="circleContainer circleContainer--playerPlace">
+        <div class="circleContainer__inner">
+          <div class="circleContainer__outerBorder">
+            <div class="circleContainer__content">
+              <h3 class="circleContainer__heading">
+                What type of<br>patients do you see?
+              </h3>
+              <div class="circleContainer__text">
+                <p>
+                  Please look at the following screens to see if any of the
+                  patient characteristics described t the pro le of patients in
+                  your care.
+                </p>
+                <p>
+                  More than one answer can be selected
+                  on each screen.
+                </p>
+                <p>
+                  At the end of the activity, you will be able to compare your
+                  answers with those of your colleagues.
+                </p>
+              </div>
+              <img class="circleContainer__logo" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageContainer__footer pageContainer__footer--withoutRefInfo">
+    <hr class="horizontalDottedDelimiter" />
+    <span>Ref information</span>
+  </div>
+</div>
 
-<router-outlet></router-outlet>
+<div class="pageContainer" [class.pageContainer--quiz]="currentPageIndex === 2">
+  <img src="" class="logo" />
+  <div class="pageContainer__header">
+    <hr class="horizontalDottedDelimiter" />
+  </div>
+  <div class="pageContainer__content">
+    <div class="quizContainer">
+      <div class="question">
+        <p class="question__title">{{question.title}}</p>
+        <p class="question__subtitle">{{question.subtitle}}</p>
+      </div>
+      <div class="answersContainer" [class.answersContainer--hasSelectedAnswer]="hasSelectedAnswers">
+        <div class="answer" *ngFor="let answer of question.answers; let index = index" [class.answer--selected]="answer.selected" (click)="toggleSelected(index)">
+          <div class="answer__portrait">
+            <img [src]="answer.portrait" />
+          </div>
+          <div class="answer__desc">
+            <p class="answer__selectedText">Selected</p>
+            <span>{{answer.desc}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="answersTip">
+        <span [hidden]="diversityProfile.length != 0">
+          Tap on the face (or faces) of those you<br>typically see in clinical practice.
+        </span>
+      </div>
+    </div>
+    <div class="diversityProfile" [hidden]="diversityProfile.length === 0">
+      <p class="diversityProfile__text">Your diversity profile</p>
+      <div class="diversityProfile__portraitContainer">
+        <img *ngFor="let profile of diversityProfile" [src]="profile" class="diversityProfile__portrait">
+      </div>
+    </div>
+    <div class="diversityScore">
+      <p class="diversityScore__text">Diversity score</p>
+      <span class="diversityScore__score">
+        <span class="diversityScore__number">0</span>
+        <span class="diversityScore__number">0</span>
+      </span>
+    </div>
+  </div>
+  <div class="pageContainer__footer pageContainer__footer--withoutRefInfo">
+    <hr class="horizontalDottedDelimiter" />
+    <!--<span>Ref information</span>-->
+  </div>
+</div>

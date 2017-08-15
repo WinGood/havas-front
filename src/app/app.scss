@@ -1,0 +1,423 @@
+h1 {
+
+}
+
+$headerHeight: 50px;
+$portraitRowSecond: calc(33.333333% + 10px);
+$portraitRowThird: calc(33.333333% + 33.333333% + 10px);
+$portraitRowHeight: calc(33.333333% - 10px);
+$green: #7ebe71;
+$mainColor: #37225c;
+$backgroundColor: #f2f1f1;
+
+@mixin clearfix() {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin absoluteFullWidth() {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.welcomePage {
+  display: flex;
+  height: 100%;
+
+  &__column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 50px;
+  }
+  &__columnTop,
+  &__columnBottom {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    &--alignBottom {
+      justify-content: flex-end;
+    }
+  }
+  .dashed-delimiter {
+    border-left: 5px dotted $green;
+    height: calc(100% - 50px);
+    position: relative;
+    top: 25px;
+  }
+  h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+  h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  p {
+    margin-bottom: 15px;
+  }
+  .big-text {
+    font-size: 22px;
+  }
+}
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: $backgroundColor;
+
+  &__header,
+  &__footer {
+    height: $headerHeight;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header {
+    justify-content: flex-end;
+  }
+
+  &__footer {
+
+  }
+
+  &__content {
+    flex: 1;
+    position: relative;
+    background: $backgroundColor url("../assets/equalizer.png") center center no-repeat;
+    background-size: contain;
+  }
+
+  &--withGameScore {
+
+  }
+
+  &--briefing {
+
+  }
+
+  .diversityProfile {
+    position: absolute;
+    left: 0px;
+    bottom: -$headerHeight;
+  }
+
+  .diversityScore {
+    position: absolute;
+    right: 20px;
+    bottom: -40px;
+  }
+}
+
+.horizontalDottedDelimiter {
+  border: none;
+  border-top: 5px dotted $green;
+  color: $backgroundColor;
+  background-color: $backgroundColor;
+  height: 1px;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.row {
+  display: flex;
+
+  &__column {
+    width: calc(12.5% - 10px);
+    margin: 0 10px;
+  }
+}
+
+.circleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 2;
+}
+
+.circleContainer {
+  position: relative;
+  width: 40%;
+  border-radius: 50%;
+  background-color: #eee;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: #eee;
+    border-radius: 50%;
+    left: 0px;
+    right: 0px;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__outerBorder {
+    width: calc(100% - 25px);
+    height: calc(100% - 25px);
+    border-radius: 50%;
+    border: 5px dotted $green;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__content {
+    max-width: calc(100% - 60px);
+    padding-top: 10%;
+    padding-bottom: 10%;
+  }
+
+  &__heading {
+    font-size: 30px;
+    font-size: 3.5vw;
+    margin-bottom: 10px;
+  }
+
+  &__text p {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-size: 1.5vw;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  @include clearfix();
+}
+
+.portraitRow {
+  display: flex;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 33.333333%;
+
+  &__col {
+    width: calc(12.5% - 10px);
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-right: 10px;
+
+    &:last-child {
+      width: 12.5%;
+      margin-right: 0;
+    }
+  }
+
+  &--first {
+    top: 0;
+  }
+
+  &--second {
+    top: $portraitRowSecond;
+    height: $portraitRowHeight;
+  }
+
+  &--third {
+    top: $portraitRowThird;
+    height: $portraitRowHeight;
+  }
+}
+
+.quizContainer {
+  @include absoluteFullWidth();
+  display: flex;
+  flex-direction: column;
+
+  .question {
+    flex: 1.6;
+  }
+
+  .answersContainer {
+    //flex: 2;
+  }
+
+  .answersTip {
+    flex: 1;
+  }
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  color: $mainColor;
+
+  &__title {
+    font-size: 34px;
+    //font-size: 3.6vw;
+    font-size: 7.6vh;
+  }
+
+  &__subtitle {
+    font-size: 16px;
+    //font-size: 1.75vw;
+    font-size: 5.6vh;
+  }
+}
+
+.answersContainer {
+  width: 50%;
+  max-width: 960px;
+  margin: 0 auto;
+
+  .answer {
+    width: calc(33.333333% - 10px);
+    float: left;
+    margin: 0 5px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &--hasSelectedAnswer {
+    .answer:not(.answer--selected) {
+      .answer__portrait {
+        //width: 90%;
+        //padding: 0;
+      }
+    }
+  }
+
+  @include clearfix();
+}
+
+.answersTip {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 60%;
+  margin: 0 auto;
+  color: $green;
+  font-size: 15px;
+  font-size: 1.8vw;
+  margin-top: 35px;
+}
+
+.answer {
+  &__selectedText {
+    text-transform: uppercase;
+    color: transparent;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+
+  &__desc {
+    text-align: center;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  &__portrait {
+    padding: 5px;
+    //max-width: calc(90% - 14px);
+    max-width: calc(100% - 14px);
+    margin: 0 auto;
+    border: 2px solid transparent;
+  }
+
+  &--selected {
+    .answer__portrait {
+      //max-width: calc(100% - 14px);
+      border: 2px solid $green;
+    }
+
+    .answer__desc {
+      border-radius: 8px;
+      background-color: #f2f7ea;
+      box-shadow: 0px 0px 8px $green;
+    }
+
+    .answer__selectedText {
+      color: $green;
+    }
+  }
+}
+
+.diversityProfile {
+  width: calc(100% - 340px);
+
+  &__text {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    color: $green;
+  }
+
+  &__portraitContainer {
+    width: 100%;
+    @include clearfix();
+  }
+
+  &__portrait {
+    max-width: 5%;
+    margin-right: 5px;
+    float: left;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.diversityScore {
+  width: 230px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 16px;
+  border: 2px solid $green;
+  color: $mainColor;
+  padding: 15px 15px;
+
+  &__text {
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-size: 24px;
+    white-space: nowrap;
+  }
+
+  &__score {
+    font-weight: bold;
+    font-size: 136px;
+    line-height: 132px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__number {
+    margin-right: 5px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
