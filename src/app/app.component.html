@@ -1,13 +1,14 @@
-<!--<router-outlet></router-outlet>-->
-<div class="welcomePage" *ngIf="currentPageIndex === 0">
+<div class="welcomePage"
+     (click)="nextStep()"
+     *ngIf="currentPageIndex === 0">
   <div class="welcomePage__column">
     <div class="welcomePage__columnTop welcomePage__columnTop--alignBottom">
       <h1>What type<br>of diabetes<br>patients do<br>you see?</h1>
     </div>
     <div class="welcomePage__columnBottom">
       <p class="big-text">
-        In a picture quiz format, clinicians are asked to select patients that
-        are typical of their practice. More than one selection is allowed. After the interaction clinicians can compare their results with those of their colleagues.
+        In a picture quiz format, clinicians<br>are asked to select patients
+        that are<br>typical of their practice.<br>More than one selection is allowed.<br>After the interaction clinicians can<br>compare their results with those of<br>their colleagues.
       </p>
     </div>
   </div>
@@ -26,67 +27,70 @@
     </div>
   </div>
 </div>
-<div class="pageContainer pageContainer--briefing pageContainer--withGameScore" *ngIf="currentPageIndex === 1">
+<div
+    (click)="nextStep()"
+    class="pageContainer pageContainer--briefing pageContainer--withGameScore"
+    *ngIf="currentPageIndex === 1">
   <div class="pageContainer__header">
     <hr class="horizontalDottedDelimiter" />
   </div>
-  <div class="pageContainer__content">
+  <div class="pageContainer__content pageContainer__content--withoutBg">
     <div class="portraitRow portraitRow--first">
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_1.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_3.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_1.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_3.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_1.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
     </div>
     <div class="portraitRow portraitRow--second">
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_3.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_1.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_3.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_1.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_3.jpg)'}"></div>
     </div>
     <div class="portraitRow portraitRow--third">
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_3.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_1.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_3.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_1.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(http://www.superheroes.ru/i/p/SS7180_02.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p1_3.jpg)'}"></div>
     </div>
     <div class="circleWrapper">
-      <div class="circleContainer circleContainer--playerPlace">
+      <div class="circleContainer">
         <div class="circleContainer__inner">
           <div class="circleContainer__outerBorder">
             <div class="circleContainer__content">
@@ -100,15 +104,17 @@
                   your care.
                 </p>
                 <p>
-                  More than one answer can be selected
-                  on each screen.
-                </p>
+                  <strong>More than one answer can be selected</strong><br>on
+                  each
+                  screen.</p>
                 <p>
                   At the end of the activity, you will be able to compare your
                   answers with those of your colleagues.
                 </p>
               </div>
-              <img class="circleContainer__logo" />
+              <div class="circleContainer__logoContainer">
+                <img src="assets/logo.png" />
+              </div>
             </div>
           </div>
         </div>
@@ -117,16 +123,18 @@
   </div>
   <div class="pageContainer__footer pageContainer__footer--withoutRefInfo">
     <hr class="horizontalDottedDelimiter" />
-    <span>Ref information</span>
+    <span>Toujeo® (insulin glargine 300 U/mL) is registered in Portugal but not marketed. Toujeo® (insulin glargine 300 U/mL) está registado em Portugal mas não é comercializado. Always refer to the prescribing information available in your country. Prescribing information is available at this booth. SAGLB.TJO.17.07.0790 August 2017</span>
   </div>
 </div>
 
-<div class="pageContainer" [class.pageContainer--quiz]="currentPageIndex === 2">
-  <img src="" class="logo" />
+<div class="pageContainer" *ngIf="currentPageIndex === 2" [class.pageContainer--quiz]="currentPageIndex === 2">
   <div class="pageContainer__header">
     <hr class="horizontalDottedDelimiter" />
   </div>
   <div class="pageContainer__content">
+    <div class="pageLogo">
+      <img src="assets/logo.png" />
+    </div>
     <div class="quizContainer">
       <div class="question">
         <p class="question__title">{{question.title}}</p>
@@ -143,7 +151,7 @@
           </div>
         </div>
       </div>
-      <div class="answersTip">
+      <div class="answersTip" (click)="nextStep()">
         <span [hidden]="diversityProfile.length != 0">
           Tap on the face (or faces) of those you<br>typically see in clinical practice.
         </span>
@@ -155,7 +163,7 @@
         <img *ngFor="let profile of diversityProfile" [src]="profile" class="diversityProfile__portrait">
       </div>
     </div>
-    <div class="diversityScore">
+    <div class="diversityScore" (click)="nextStep()">
       <p class="diversityScore__text">Diversity score</p>
       <span class="diversityScore__score">
         <span class="diversityScore__number">0</span>
@@ -166,5 +174,164 @@
   <div class="pageContainer__footer pageContainer__footer--withoutRefInfo">
     <hr class="horizontalDottedDelimiter" />
     <!--<span>Ref information</span>-->
+  </div>
+</div>
+
+<div class="pageContainer" *ngIf="currentPageIndex === 3">
+  <div class="pageContainer__header">
+    <hr class="horizontalDottedDelimiter" />
+  </div>
+  <div class="pageContainer__content">
+    <div class="circleWrapper circleWrapper--сongratulations">
+      <div class="circleContainer">
+        <div class="circleContainer__inner">
+          <div class="circleContainer__outerBorder">
+            <div class="circleContainer__content">
+              <h3 class="circleContainer__heading">
+                Congratulations!
+              </h3>
+              <div class="circleContainer__text">
+                <p>
+                  As you know, the clinical characteristics of patients with
+                  diabetes can vary considerably. In a typical practice, there
+                  is no such thing as a typical patient. Ask one of the Sanofi
+                  team if you have any questions about patients characteristics
+                  and their relevance to your real-world experience.
+                </p>
+              </div>
+              <div class="circleContainer__logoContainer">
+                <img src="assets/logo.png" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="answersCompareContainer">
+      <div class="answersCompareContainer__btn" (click)="nextStep()">
+        See how your answers compare<br>with those of your colleagues
+      </div>
+    </div>
+    <div class="diversityScore" (click)="nextStep()">
+      <p class="diversityScore__text">Diversity score</p>
+      <span class="diversityScore__score">
+        <span class="diversityScore__number">0</span>
+        <span class="diversityScore__number">8</span>
+      </span>
+    </div>
+  </div>
+  <div class="pageContainer__footer">
+    <hr class="horizontalDottedDelimiter" />
+    <span>Toujeo® (insulin glargine 300 U/mL) is registered in Portugal but not marketed. Toujeo® (insulin glargine 300 U/mL) está registado em Portugal mas não é comercializado. Always refer to the prescribing information available in your country. Prescribing information is available at this booth. SAGLB.TJO.17.07.0790 August 2017</span>
+  </div>
+</div>
+
+<div class="pageContainer" *ngIf="currentPageIndex === 4">
+  <div class="pageContainer__header">
+    <hr class="horizontalDottedDelimiter" />
+  </div>
+  <div class="pageContainer__content pageContainer__content--withoutBg"
+       (click)="resetStep()">
+    <div class="gameResultsHeading">
+      <span>How your answers compare<br>to your colleagues</span>
+    </div>
+    <table class="gameResultsTable" width="100%" cellpadding="0"
+           cellspacing="0">
+      <thead>
+      <tr>
+        <th width="15%">Position</th>
+        <th>Patients</th>
+        <th width="20%">Diversity score</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="gameResultsTable__result">
+        <td class="gameResultsTable__resultPlace">1st</td>
+        <td>
+          <div class="gameResultsTable__patients">
+            <div><img src="../assets/p1_1.jpg" /></div>
+            <div><img src="../assets/p1_2.jpg" /></div>
+            <div><img src="../assets/p1_3.jpg" /></div>
+            <div><img src="../assets/p1_1.jpg" /></div>
+            <div><img src="../assets/p1_2.jpg" /></div>
+            <div><img src="../assets/p1_3.jpg" /></div>
+            <div><img src="../assets/p1_1.jpg" /></div>
+            <div><img src="../assets/p1_2.jpg" /></div>
+            <div><img src="../assets/p1_3.jpg" /></div>
+            <div><img src="../assets/p1_1.jpg" /></div>
+            <div><img src="../assets/p1_2.jpg" /></div>
+            <div><img src="../assets/p1_3.jpg" /></div>
+            <div><img src="../assets/p1_1.jpg" /></div>
+            <div><img src="../assets/p1_2.jpg" /></div>
+            <div><img src="../assets/p1_3.jpg" /></div>
+            <div><img src="../assets/p1_1.jpg" /></div>
+            <div><img src="../assets/p1_2.jpg" /></div>
+            <div><img src="../assets/p1_3.jpg" /></div>
+          </div>
+        </td>
+        <td class="gameResultsTable__resultScore">29</td>
+      </tr>
+      <tr class="gameResultsTable__result">
+        <td class="gameResultsTable__resultPlace">9th</td>
+        <td>
+          <div class="gameResultsTable__patients">
+            <div><img src="../assets/p1_1.jpg" /></div>
+            <div><img src="../assets/p1_2.jpg" /></div>
+            <div><img src="../assets/p1_3.jpg" /></div>
+            <div><img src="../assets/p1_1.jpg" /></div>
+            <div><img src="../assets/p1_2.jpg" /></div>
+            <div><img src="../assets/p1_3.jpg" /></div>
+            <div><img src="../assets/p1_1.jpg" /></div>
+            <div><img src="../assets/p1_2.jpg" /></div>
+          </div>
+        </td>
+        <td class="gameResultsTable__resultScore">12</td>
+      </tr>
+      <tr class="gameResultsTable__result gameResultsTable__result--myResult">
+        <td class="gameResultsTable__resultPlace gameResultsTable__resultPlace--myResult">
+          <div class="circleWrapper">
+            <div class="circleContainer">
+              <div class="circleContainer__inner">
+                <div class="circleContainer__outerBorder">
+                  <div class="circleContainer__content">
+                    <h3 class="circleContainer__heading">
+                      You
+                    </h3>
+                    <div class="circleContainer__text">10th</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="gameResultsTable__patients">
+            <div><img src="../assets/p1_1.jpg" /></div>
+            <div><img src="../assets/p1_2.jpg" /></div>
+            <div><img src="../assets/p1_3.jpg" /></div>
+            <div><img src="../assets/p1_1.jpg" /></div>
+            <div><img src="../assets/p1_2.jpg" /></div>
+          </div>
+        </td>
+        <td class="gameResultsTable__resultScore">9</td>
+      </tr>
+      <tr class="gameResultsTable__result">
+        <td class="gameResultsTable__resultPlace">11th</td>
+        <td>
+          <div class="gameResultsTable__patients">
+            <div><img src="../assets/p1_1.jpg" /></div>
+            <div><img src="../assets/p1_2.jpg" /></div>
+            <div><img src="../assets/p1_3.jpg" /></div>
+            <div><img src="../assets/p1_1.jpg" /></div>
+          </div>
+        </td>
+        <td class="gameResultsTable__resultScore">8</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pageContainer__footer">
+    <hr class="horizontalDottedDelimiter" />
+    <span>Toujeo® (insulin glargine 300 U/mL) is registered in Portugal but not marketed. Toujeo® (insulin glargine 300 U/mL) está registado em Portugal mas não é comercializado. Always refer to the prescribing information available in your country. Prescribing information is available at this booth. SAGLB.TJO.17.07.0790 August 2017</span>
   </div>
 </div>

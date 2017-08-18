@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  currentPageIndex: number = 2;
+  currentPageIndex: number = 0;
   private currentQuestionIndex: number = 0;
   private questions = [{
     title: 'What age',
@@ -19,11 +19,11 @@ export class AppComponent {
     }, {
       portrait: 'assets/p1_2.jpg',
       selected: false,
-      desc: '20-35 years'
+      desc: '35-65 years'
     }, {
       portrait: 'assets/p1_3.jpg',
       selected: false,
-      desc: '20-35 years'
+      desc: 'over 65 years'
     }]
   }];
 
@@ -52,5 +52,13 @@ export class AppComponent {
     } else {
       this.diversityProfile.pop();
     }
+  }
+  
+  nextStep() {
+    this.currentPageIndex += 1; 
+  }
+  
+  resetStep() {
+    this.currentPageIndex = 0;
   }
 }
