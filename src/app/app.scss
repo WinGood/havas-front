@@ -201,7 +201,12 @@ img {
     margin-top: 60px;
 
     .circleContainer {
+      width: 37.5%;
       margin: 0 auto;
+    }
+
+    .circleContainer__logoContainer img {
+      //max-width: 85%;
     }
 
     .circleContainer__content {
@@ -440,6 +445,19 @@ img {
     .answer__selectedText {
       color: $green;
     }
+  }
+
+  &__nextBtn {
+    width: 160px;
+    height: 46px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid #bdbdbd;
+    color: $mainColor;
+    padding: 0px 20px;
+    border-radius: 8px;
+    line-height: 46px;
+    font-size: 18px;
   }
 }
 

@@ -147,14 +147,15 @@
           </div>
           <div class="answer__desc">
             <p class="answer__selectedText">Selected</p>
-            <span>{{answer.desc}}</span>
+            <span [innerHTML]="answer.desc"></span>
           </div>
         </div>
       </div>
-      <div class="answersTip" (click)="nextStep()">
-        <span [hidden]="diversityProfile.length != 0">
+      <div class="answersTip">
+        <span [hidden]="hasSelectedAnswers">
           Tap on the face (or faces) of those you<br>typically see in clinical practice.
         </span>
+        <button class="answer__nextBtn" [hidden]="!hasSelectedAnswers" (click)="nextQuestion()">Next question</button>
       </div>
     </div>
     <div class="diversityProfile" [hidden]="diversityProfile.length === 0">
