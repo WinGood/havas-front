@@ -3,7 +3,7 @@
   <span>Loading...</span>
   <div class="loadingPage__imagesContainer">
     <img *ngFor="let imageName of preloadImagesList"
-         src="assets/{{imageName}}.jpg"
+         src="assets/{{imageName}}"
          (load)="imageWasLoaded()" />
   </div>
 </div>

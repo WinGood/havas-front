@@ -12,15 +12,16 @@ export class AppComponent {
   public diversityScore: number = 0;
   public appIsReady: boolean = false;
   public preloadImagesList = [
-    'p1_1', 'p1_2', 'p1_3',
-    'p2_1', 'p2_2', 'p2_3',
-    'p3_1', 'p3_2', 'p3_3',
-    'p4_1', 'p4_2', 'p4_3',
-    'p5_1', 'p5_2', 'p5_3',
-    'p6_1', 'p6_2', 'p6_3',
-    'p7_1', 'p7_2', 'p7_3',
-    'p8_1', 'p8_2', 'p8_3',
-    'p9_1', 'p9_2', 'p9_3'
+    'p1_1.jpg', 'p1_2.jpg', 'p1_3.jpg',
+    'p2_1.jpg', 'p2_2.jpg', 'p2_3.jpg',
+    'p3_1.jpg', 'p3_2.jpg', 'p3_3.jpg',
+    'p4_1.jpg', 'p4_2.jpg', 'p4_3.jpg',
+    'p5_1.jpg', 'p5_2.jpg', 'p5_3.jpg',
+    'p6_1.jpg', 'p6_2.jpg', 'p6_3.jpg',
+    'p7_1.jpg', 'p7_2.jpg', 'p7_3.jpg',
+    'p8_1.jpg', 'p8_2.jpg', 'p8_3.jpg',
+    'p9_1.jpg', 'p9_2.jpg', 'p9_3.jpg',
+    'equalizer.png', 'logo.png'
   ];
 
   private countOfLoadedImages: number = 0;
