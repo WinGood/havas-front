@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  currentPageIndex: number = 1;
+  public currentPageIndex: number = 0;
   private currentQuestionIndex: number = 0;
   private questions = [{
     title: 'What age',
@@ -197,5 +197,10 @@ export class AppComponent {
   
   resetStep() {
     this.currentPageIndex = 0;
+    this.diversityProfile = [];
+    this.diversityScore = 0;
+    this.questions.forEach(question => {
+      question.answers.forEach(answer => answer.selected = false);
+    });
   }
 }
