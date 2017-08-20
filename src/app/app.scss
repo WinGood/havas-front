@@ -57,9 +57,9 @@ img {
   }
   .dashed-delimiter {
     border-left: $borderWidth dotted $green;
-    height: 90%;
+    height: 95vh;
     position: relative;
-    top: 5%;
+    top: 2.5vh;
   }
   h1 {
     font-size: 48px;
@@ -107,6 +107,8 @@ img {
   &__footer {
     justify-content: center;
     align-items: center;
+    line-height: 16px;
+    padding: 0 10px;
   }
 
   &__content {
@@ -403,6 +405,7 @@ img {
   color: $green;
   font-size: 15px;
   font-size: 1.8vw;
+  line-height: 2.2vw;
   margin-top: 35px;
 }
 
@@ -477,7 +480,7 @@ img {
   }
 
   &__portrait {
-    max-width: 5%;
+    max-width: 3.2%;
     margin-right: 5px;
     float: left;
 
@@ -632,13 +635,13 @@ img {
     }
 
     .big-text {
-      font-size: 22px;
-      line-height: 28px;
+      font-size: 21px;
+      line-height: 27px;
     }
 
     p {
-      font-size: 18px;
-      line-height: 24px;
+      font-size: 17px;
+      line-height: 23px;
     }
 
     h3 {
@@ -664,6 +667,18 @@ img {
   .circleContainer__logoContainer img {
     max-width: 80%;
     margin: 0 auto;
+  }
+
+  .question {
+    &__title {
+      font-size: 68px;
+      line-height: 82px;
+    }
+
+    &__subtitle {
+      font-size: 42px;
+      line-height: 46px;
+    }
   }
 }
 
@@ -710,5 +725,17 @@ img {
   .circleContainer__logoContainer img {
     max-width: 90%;
     margin: 0 auto;
+  }
+
+  .question {
+    &__title {
+      font-size: 82px;
+      line-height: 96px;
+    }
+
+    &__subtitle {
+      font-size: 54px;
+      line-height: 58px;
+    }
   }
 }

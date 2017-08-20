@@ -43,51 +43,51 @@
       <div class="portraitRow__col"
            [ngStyle]="{'background-image': 'url(assets/p1_3.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_1.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p2_1.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p2_2.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_3.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p2_3.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_1.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p3_1.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p3_2.jpg)'}"></div>
     </div>
     <div class="portraitRow portraitRow--second">
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_3.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p3_1.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p4_1.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_1.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p4_2.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_3.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p4_3.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p5_1.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_1.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p5_2.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p5_3.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_3.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p6_1.jpg)'}"></div>
     </div>
     <div class="portraitRow portraitRow--third">
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p6_2.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_3.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p6_3.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_1.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p7_1.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p7_2.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_3.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p7_3.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_1.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p8_1.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p8_2.jpg)'}"></div>
       <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_3.jpg)'}"></div>
+           [ngStyle]="{'background-image': 'url(assets/p8_3.jpg)'}"></div>
     </div>
     <div class="circleWrapper">
       <div class="circleContainer">
@@ -137,11 +137,11 @@
     </div>
     <div class="quizContainer">
       <div class="question">
-        <p class="question__title">{{question.title}}</p>
+        <p class="question__title" [innerHTML]="question.title"></p>
         <p class="question__subtitle">{{question.subtitle}}</p>
       </div>
       <div class="answersContainer" [class.answersContainer--hasSelectedAnswer]="hasSelectedAnswers">
-        <div class="answer" *ngFor="let answer of question.answers; let index = index" [class.answer--selected]="answer.selected" (click)="toggleSelected(index)">
+        <div class="answer" *ngFor="let answer of question.answers; let index = index" [class.answer--selected]="answer.selected" (click)="toggleSelected(answer, index)">
           <div class="answer__portrait">
             <img [src]="answer.portrait" />
           </div>
@@ -167,14 +167,12 @@
     <div class="diversityScore" (click)="nextStep()">
       <p class="diversityScore__text">Diversity score</p>
       <span class="diversityScore__score">
-        <span class="diversityScore__number">0</span>
-        <span class="diversityScore__number">0</span>
+        <span class="diversityScore__number">{{diversityScore | numberWithLeadingZero}}</span>
       </span>
     </div>
   </div>
   <div class="pageContainer__footer pageContainer__footer--withoutRefInfo">
     <hr class="horizontalDottedDelimiter" />
-    <!--<span>Ref information</span>-->
   </div>
 </div>
 
@@ -216,8 +214,7 @@
     <div class="diversityScore" (click)="nextStep()">
       <p class="diversityScore__text">Diversity score</p>
       <span class="diversityScore__score">
-        <span class="diversityScore__number">0</span>
-        <span class="diversityScore__number">8</span>
+        <span class="diversityScore__number">{{diversityScore | numberWithLeadingZero}}</span>
       </span>
     </div>
   </div>

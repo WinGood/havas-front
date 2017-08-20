@@ -86,3 +86,13 @@ body, html {
   padding: 0;
   //box-sizing: border-box;
 }
+
+.up {
+  vertical-align: super;
+  font-size: smaller;
+}
+
+.down {
+  vertical-align: sub;
+  font-size: smaller;
+}

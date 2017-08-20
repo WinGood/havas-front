@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomePage } from '../pages/welcome/welcome';
+import { numberWithLeadingZero } from '../pipes/leading-zero';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomePage
+    WelcomePage,
+    numberWithLeadingZero
   ],
   imports: [
     BrowserModule,
