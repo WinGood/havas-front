@@ -1,6 +1,15 @@
+<div class="loadingPage"
+     *ngIf="currentPageIndex === 0 && appIsReady === false">
+  <span>Loading...</span>
+  <div class="loadingPage__imagesContainer">
+    <img *ngFor="let imageName of preloadImagesList"
+         src="assets/{{imageName}}.jpg"
+         (load)="imageWasLoaded()" />
+  </div>
+</div>
 <div class="welcomePage"
      (click)="nextStep()"
-     *ngIf="currentPageIndex === 0">
+     *ngIf="currentPageIndex === 0 && appIsReady === true">
   <div class="welcomePage__column">
     <div class="welcomePage__columnTop welcomePage__columnTop--alignBottom">
       <h1>What type<br>of diabetes<br>patients do<br>you see?</h1>
@@ -229,7 +238,7 @@
     <hr class="horizontalDottedDelimiter" />
   </div>
   <div class="pageContainer__content pageContainer__content--withoutBg"
-       (click)="resetStep()">
+       (click)="resetGame()">
     <div class="gameResultsHeading">
       <span>How your answers compare<br>to your colleagues</span>
     </div>

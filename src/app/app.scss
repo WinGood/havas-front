@@ -7,6 +7,22 @@ $mainColor: #37225c;
 $backgroundColor: #f2f1f1;
 $borderWidth: 8px;
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@mixin fadeInAnimation() {
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+  animation-name: fadeIn;
+}
+
 @mixin clearfix() {
   &:after {
     content: "";
@@ -23,11 +39,26 @@ $borderWidth: 8px;
   bottom: 0;
 }
 
+.loadingPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: $mainColor;
+  font-size: 32px;
+  @include fadeInAnimation();
+
+  &__imagesContainer {
+    display: none;
+  }
+}
+
 .welcomePage {
   display: flex;
   width: 70%;
   height: 100%;
   margin: 0 auto;
+  @include fadeInAnimation();
 
   &__column {
     flex: 1;
@@ -107,6 +138,7 @@ $borderWidth: 8px;
     position: relative;
     background: $backgroundColor url("../assets/equalizer.png") center center no-repeat;
     background-size: contain;
+    @include fadeInAnimation();
 
     &--withoutBg {
       background: none;

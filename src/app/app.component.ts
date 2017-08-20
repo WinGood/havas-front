@@ -8,6 +8,22 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   public currentPageIndex: number = 0;
+  public diversityProfile = [];
+  public diversityScore: number = 0;
+  public appIsReady: boolean = false;
+  public preloadImagesList = [
+    'p1_1', 'p1_2', 'p1_3',
+    'p2_1', 'p2_2', 'p2_3',
+    'p3_1', 'p3_2', 'p3_3',
+    'p4_1', 'p4_2', 'p4_3',
+    'p5_1', 'p5_2', 'p5_3',
+    'p6_1', 'p6_2', 'p6_3',
+    'p7_1', 'p7_2', 'p7_3',
+    'p8_1', 'p8_2', 'p8_3',
+    'p9_1', 'p9_2', 'p9_3'
+  ];
+
+  private countOfLoadedImages: number = 0;
   private currentQuestionIndex: number = 0;
   private questions = [{
     title: 'What age',
@@ -155,9 +171,6 @@ export class AppComponent {
     }]
   }];
 
-  diversityProfile = [];
-  diversityScore: number = 0;
-
   get question() {
     return this.questions[this.currentQuestionIndex];
   }
@@ -194,13 +207,21 @@ export class AppComponent {
   nextStep() {
     this.currentPageIndex += 1; 
   }
-  
-  resetStep() {
+
+  resetGame() {
     this.currentPageIndex = 0;
-    this.diversityProfile = [];
     this.diversityScore = 0;
+    this.diversityProfile = [];
     this.questions.forEach(question => {
       question.answers.forEach(answer => answer.selected = false);
     });
+  }
+  
+  imageWasLoaded() {
+    this.countOfLoadedImages += 1;
+    
+    if (this.countOfLoadedImages === this.preloadImagesList.length) {
+      this.appIsReady = true;
+    }
   }
 }
