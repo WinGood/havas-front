@@ -64,6 +64,11 @@ table {
 }
 
 @font-face {
+  font-family: 'AvantGardeBold';
+  src: url("assets/avant-garde-bold.ttf");
+}
+
+@font-face {
   font-family: 'AvantGardeExtraLight';
   src: url("assets/avant-garde-extra-light.ttf");
 }
@@ -79,6 +84,10 @@ body, html {
   font-family: AvantGardeMedium, Arial;
   font-size: 14px;
   font-size: 1.4vw;
+}
+
+strong, b {
+  font-family: AvantGardeBold, AvantGardeMedium, Arial;
 }
 
 * {

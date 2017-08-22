@@ -1,62 +1,6 @@
 @import "../bourbon/bourbon";
-
-$headerHeight: 50px;
-$portraitRowSecond: calc(33.333333% + 10px);
-$portraitRowThird: calc(33.333333% + 33.333333% + 10px);
-$portraitRowHeight: calc(33.333333% - 10px);
-$green: #7ebe71;
-$mainColor: #37225c;
-$backgroundColor: #f2f1f1;
-$borderWidth: 8px;
-
-@keyframes fadeInAnimation {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes pop-up {
-  0% { transform: translateY(50px) scale(0); opacity: 0; }
-  100% { transform: translateY(0px) scale(1); opacity: 1; }
-}
-
-$image-count: 8;
-
-@function nth-origin($total, $n, $amount: 50px) {
-  $i: $n - 1;
-  $mid: ($total - 1) / 2;
-  $m:  $i - $mid;
-  @return $m * $amount * -1;
-}
-
-@mixin patientsAnimation($total) {
-  @for $i from 1 through $total {
-    &:nth-of-type( #{$i} ) {
-      @include transform-origin(nth-origin($total, $i, 100px));
-      @include animation(fadeIn 1.5s 0.1s*$i forwards cubic-bezier(0, 0.8, 0.4, 1));
-      @include keyframes(fadeIn) {
-        0% {
-          opacity: 0;
-          @include transform(scale(0.3));
-        }
-        100% {
-          opacity: 1;
-          @include transform(scale(1));
-        }
-      }
-    }
-  }
-}
-
-@mixin fadeInAnimation() {
-  animation-duration: 0.8s;
-  animation-fill-mode: both;
-  animation-name: fadeInAnimation;
-}
+@import "../variables";
+@import "../animations";
 
 @mixin clearfix() {
   &:after {
@@ -192,6 +136,7 @@ $image-count: 8;
     position: absolute;
     left: $headerHeight;
     top: 15px;
+    z-index: 10;
   }
 
   .diversityProfile {
@@ -276,7 +221,7 @@ circle-el {
     }
 
     .circleContainer__content {
-      max-width: calc(100% - 180px);
+      max-width: calc(100% - 170px);
       padding-top: 18%;
       padding-bottom: 4%;
     }
@@ -333,7 +278,7 @@ circle-el {
   }
 
   &__content {
-    max-width: calc(100% - 180px);
+    max-width: calc(100% - 170px);
     padding-top: 10%;
     padding-bottom: 4%;
     display: flex;
@@ -347,7 +292,7 @@ circle-el {
     font-size: 2.9vw;
     line-height: 3vw;
     font-weight: normal;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
   }
 
   &__text p {
@@ -361,6 +306,12 @@ circle-el {
     &:last-child {
       margin-bottom: 0;
     }
+  }
+
+  &__text strong {
+    font-size: 22px;
+    font-size: 1.3vw;
+    line-height: 1.7vw;
   }
 
   &__logoContainer {
@@ -437,35 +388,15 @@ portrait-row {
   display: flex;
   flex-direction: column;
 
-  .question {
+  question {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex: 1.6;
-  }
-
-  .answersContainer {
-    //flex: 2;
   }
 
   .answersTip {
     flex: 1;
-  }
-}
-
-.question {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-  color: $mainColor;
-
-  &__title {
-    font-size: 34px;
-    font-size: 5.2vw;
-  }
-
-  &__subtitle {
-    font-size: 16px;
-    font-size: 3.2vw;
   }
 }
 
@@ -484,15 +415,6 @@ portrait-row {
     }
   }
 
-  &--hasSelectedAnswer {
-    .answer:not(.answer--selected) {
-      .answer__portrait {
-        //width: 90%;
-        //padding: 0;
-      }
-    }
-  }
-
   @include clearfix();
 }
 
@@ -507,6 +429,7 @@ portrait-row {
   font-size: 1.8vw;
   line-height: 2.2vw;
   margin-top: 35px;
+  @include fadeInAnimation();
 }
 
 .answer {
@@ -521,21 +444,24 @@ portrait-row {
   &__desc {
     text-align: center;
     padding: 10px;
-    margin-top: 10px;
     color: $mainColor;
+    max-width: calc(95% - 20px);
+    margin: 10px auto 0 auto;
   }
 
   &__portrait {
     padding: 5px;
-    //max-width: calc(90% - 14px);
-    max-width: calc(100% - 14px);
+    max-width: calc(95% - 14px);
     margin: 0 auto;
     border: 2px solid transparent;
+    opacity: 0;
+    transition: all 200ms;
+    @include patientsAnimation(3, 200px);
   }
 
   &--selected {
     .answer__portrait {
-      //max-width: calc(100% - 14px);
+      max-width: calc(100% - 14px);
       border: 2px solid $green;
     }
 
@@ -543,10 +469,13 @@ portrait-row {
       border-radius: 8px;
       background-color: #f2f7ea;
       box-shadow: 0px 0px 8px $green;
+      max-width: calc(100% - 20px);
     }
 
     .answer__selectedText {
       color: $green;
+      opacity: 0;
+      animation: pop-up 0.6s cubic-bezier(0.27,0.53,0.28,1) forwards;
     }
   }
 
@@ -697,7 +626,7 @@ portrait-row {
     @for $i from 1 through 27 {
       &--score#{$i} {
         > div {
-          @include patientsAnimation($i);
+          @include patientsAnimation($i, 100px);
         }
       }
     }
@@ -707,6 +636,7 @@ portrait-row {
   &__resultScore {
     color: $green;
     font-weight: bold;
+    font-family: AvantGardeBold, AvantGardeMedium, Arial;
   }
 
   &__resultPlace {
@@ -734,15 +664,18 @@ portrait-row {
       font-size: 26px;
       font-size: 2vw;
       line-height: 2.2vw;
-      margin-bottom: 0px;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      font-family: AvantGardeRegular, AvantGardeMedium, Arial;
     }
 
     .circleContainer__text {
       color: $mainColor;
-      font-size: 32px;
-      font-size: 2.8vw;
-      line-height: 3vw;
+      font-size: 30px;
+      font-size: 2.7vw;
+      line-height: 2.9vw;
       font-weight: bold;
+      font-family: AvantGardeBold, AvantGardeMedium, Arial;
     }
   }
 
@@ -792,18 +725,6 @@ portrait-row {
     max-width: 80%;
     margin: 0 auto;
   }
-
-  .question {
-    &__title {
-      font-size: 68px;
-      line-height: 82px;
-    }
-
-    &__subtitle {
-      font-size: 42px;
-      line-height: 46px;
-    }
-  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -849,17 +770,5 @@ portrait-row {
   .circleContainer__logoContainer img {
     max-width: 90%;
     margin: 0 auto;
-  }
-
-  .question {
-    &__title {
-      font-size: 82px;
-      line-height: 96px;
-    }
-
-    &__subtitle {
-      font-size: 54px;
-      line-height: 58px;
-    }
   }
 }

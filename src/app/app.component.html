@@ -36,9 +36,7 @@
     </div>
   </div>
 </div>
-<div
-    class="pageContainer pageContainer--briefing pageContainer--withGameScore"
-    (click)="nextStep()"
+<div class="pageContainer pageContainer--briefing pageContainer--withGameScore"
     *ngIf="currentPageIndex === 1">
   <div class="pageContainer__header">
     <hr class="horizontalDottedDelimiter" />
@@ -59,7 +57,7 @@
       </portrait-col>
     </portrait-row>
     <circle-el [longDelayAnimation]="true">
-      <div class="circleContainer">
+      <div class="circleContainer" (click)="nextStep()">
         <div class="circleContainer__inner">
           <div class="circleContainer__outerBorder">
             <div class="circleContainer__content">
@@ -97,19 +95,16 @@
   </div>
 </div>
 
-<div class="pageContainer" *ngIf="currentPageIndex === 2" [class.pageContainer--quiz]="currentPageIndex === 2">
+<div class="pageContainer" *ngIf="currentPageIndex === 2">
   <div class="pageContainer__header">
     <hr class="horizontalDottedDelimiter" />
   </div>
   <div class="pageContainer__content">
-    <div class="pageLogo">
+    <div class="pageLogo" (click)="resetQuiz()">
       <img src="assets/logo.png" />
     </div>
     <div class="quizContainer">
-      <div class="question">
-        <p class="question__title" [innerHTML]="question.title"></p>
-        <p class="question__subtitle">{{question.subtitle}}</p>
-      </div>
+      <question [question]="question"></question>
       <div class="answersContainer" [class.answersContainer--hasSelectedAnswer]="hasSelectedAnswers">
         <div class="answer" *ngFor="let answer of question.answers; let index = index" [class.answer--selected]="answer.selected" (click)="toggleSelected(answer, index)">
           <div class="answer__portrait">
@@ -134,7 +129,7 @@
         <img *ngFor="let profile of diversityProfile" [src]="profile" class="diversityProfile__portrait">
       </div>
     </div>
-    <div class="diversityScore" (click)="nextStep()">
+    <div class="diversityScore">
       <p class="diversityScore__text">Diversity score</p>
       <span class="diversityScore__score">
         <span class="diversityScore__number">{{diversityScore | numberWithLeadingZero}}</span>

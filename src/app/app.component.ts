@@ -7,10 +7,12 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  public currentPageIndex: number = 2;
+  public currentPageIndex: number = 0;
   public diversityProfile = [];
   public diversityScore: number = 0;
   public appIsReady: boolean = false;
+  public questionIsReady: boolean = false;
+  public portraitRows = [];
   public preloadImagesList = [
     'p1_1.jpg', 'p1_2.jpg', 'p1_3.jpg',
     'p2_1.jpg', 'p2_2.jpg', 'p2_3.jpg',
@@ -24,41 +26,9 @@ export class AppComponent {
     'equalizer.png', 'logo.png'
   ];
 
-  public portraitRows = [];
-
-  private generatePortraitsRow() {
-    let result = [];
-    let portraitsInRow = 8;
-    let currentQuestionIndex = 1;
-    let currentQuestionPortrainIndex = 0;
-    let rows = 3;
-
-    for (let i = 0; i < rows; i++) {
-      let columns = [];
-
-      for (let j = 0; j < portraitsInRow; j++) {
-        currentQuestionPortrainIndex += 1;
-
-        if (currentQuestionPortrainIndex === 4) {
-          currentQuestionIndex += 1;
-          currentQuestionPortrainIndex = 1;
-        }
-
-        columns[j] = {
-          frontImage: `assets/p${currentQuestionIndex}_${currentQuestionPortrainIndex}.jpg`,
-          backImage: `assets/p${currentQuestionIndex}_${currentQuestionPortrainIndex}.jpg`,
-          flip: false
-        };
-      }
-
-      result[i] = columns;
-    }
-
-    return result;
-  }
-
   private flipAnimationTimeoutId: number;
   private flipAnimationIntervalId: number;
+  private questionTimeoutId: number;
   private countOfLoadedImages: number = 0;
   private currentQuestionIndex: number = 0;
   private questions = [{
@@ -207,6 +177,37 @@ export class AppComponent {
     }]
   }];
 
+  private generatePortraitsRow() {
+    let result = [];
+    let portraitsInRow = 8;
+    let currentQuestionIndex = 1;
+    let currentQuestionPortrainIndex = 0;
+    let rows = 3;
+
+    for (let i = 0; i < rows; i++) {
+      let columns = [];
+
+      for (let j = 0; j < portraitsInRow; j++) {
+        currentQuestionPortrainIndex += 1;
+
+        if (currentQuestionPortrainIndex === 4) {
+          currentQuestionIndex += 1;
+          currentQuestionPortrainIndex = 1;
+        }
+
+        columns[j] = {
+          frontImage: `assets/p${currentQuestionIndex}_${currentQuestionPortrainIndex}.jpg`,
+          backImage: `assets/p${currentQuestionIndex}_${currentQuestionPortrainIndex}.jpg`,
+          flip: false
+        };
+      }
+
+      result[i] = columns;
+    }
+
+    return result;
+  }
+
   constructor() {
     this.portraitRows = this.generatePortraitsRow();
   }
@@ -223,6 +224,84 @@ export class AppComponent {
     if (this.currentPageIndex === 1) {
       this.startFlipAnimation();
     }
+    
+    if (this.currentPageIndex === 2) {
+      this.startNewQuestion();
+    }
+  }
+  
+  nextQuestion() {
+    let currentIndex = this.currentQuestionIndex;
+    let hasNextQuestion = this.questions[currentIndex += 1];
+    
+    this.questionIsReady = false;
+    
+    if (hasNextQuestion) {
+      this.currentQuestionIndex += 1;
+      this.startNewQuestion();
+    } else {
+      this.currentQuestionIndex = 0;
+      this.nextStep();
+    }
+  }
+
+  toggleSelected(answer, index) {
+    const currentValue = !this.question.answers[index].selected;
+    this.question.answers[index].selected = currentValue;
+    
+    if (currentValue) {
+      this.diversityScore += 1;
+      this.diversityProfile.push(answer.portrait);
+    } else {
+      this.diversityScore -= 1;
+      this.diversityProfile.pop();
+    }
+  }
+  
+  nextStep() {
+    clearTimeout(this.flipAnimationTimeoutId);
+    clearInterval(this.flipAnimationIntervalId);
+    clearTimeout(this.questionTimeoutId);
+
+    this.currentPageIndex += 1;
+    if (this.currentPageIndex === 1) {
+      this.startFlipAnimation();
+    }
+    
+    if (this.currentQuestionIndex === 2) {
+      this.startNewQuestion();
+    }
+  }
+
+  resetQuiz() {
+    this.diversityScore = 0;
+    this.currentQuestionIndex = 0;
+    this.diversityProfile = [];
+    this.questions.forEach(question => {
+      question.answers.forEach(answer => answer.selected = false);
+    });
+  }
+
+  resetGame() {
+    this.currentPageIndex = 0;
+    this.resetQuiz();
+  }
+  
+  imageWasLoaded() {
+    this.countOfLoadedImages += 1;
+    
+    if (this.countOfLoadedImages === this.preloadImagesList.length) {
+      this.appIsReady = true;
+    }
+  }
+
+
+  private startNewQuestion() {
+    clearTimeout(this.questionTimeoutId);
+
+    // this.questionTimeoutId = setTimeout(() => {
+    //   this.questionIsReady = true;
+    // }, 150);
   }
 
   private startFlipAnimation() {
@@ -236,7 +315,7 @@ export class AppComponent {
 
   private flipAnimation() {
     let portraitCount = this.portraitRows.reduce((sum, row) => sum + row.length, 0);
-    
+
     this.flipAnimationIntervalId = setInterval(() => {
       const indexes = this.getFlipStartEndIndexes(portraitCount);
       const firstInd = this.getPortraintByIndex(indexes[0]);
@@ -288,57 +367,5 @@ export class AppComponent {
 
   private getRandomNumber(end: number) {
     return Math.floor(Math.random() * end);
-  }
-  
-  nextQuestion() {
-    let currentIndex = this.currentQuestionIndex;
-    let hasNextQuestion = this.questions[currentIndex += 1];
-
-    if (hasNextQuestion) {
-      this.currentQuestionIndex += 1;
-    } else {
-      this.currentQuestionIndex = 0;
-      this.nextStep();
-    }
-  }
-
-  toggleSelected(answer, index) {
-    const currentValue = !this.question.answers[index].selected;
-    this.question.answers[index].selected = currentValue;
-    
-    if (currentValue) {
-      this.diversityScore += 1;
-      this.diversityProfile.push(answer.portrait);
-    } else {
-      this.diversityScore -= 1;
-      this.diversityProfile.pop();
-    }
-  }
-  
-  nextStep() {
-    clearTimeout(this.flipAnimationTimeoutId);
-    clearInterval(this.flipAnimationIntervalId);
-
-    this.currentPageIndex += 1;
-    if (this.currentPageIndex === 1) {
-      this.startFlipAnimation();
-    }
-  }
-
-  resetGame() {
-    this.currentPageIndex = 0;
-    this.diversityScore = 0;
-    this.diversityProfile = [];
-    this.questions.forEach(question => {
-      question.answers.forEach(answer => answer.selected = false);
-    });
-  }
-  
-  imageWasLoaded() {
-    this.countOfLoadedImages += 1;
-    
-    if (this.countOfLoadedImages === this.preloadImagesList.length) {
-      this.appIsReady = true;
-    }
   }
 }

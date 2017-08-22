@@ -9,6 +9,7 @@ import { numberWithLeadingZero } from '../pipes/leading-zero';
 import { PortraitCol } from '../components/portrait-col/portrait-col.component';
 import { PortraitRow } from '../components/portrait-row/portrait-row.component';
 import { CircleEl } from '../components/circle-el/circle-el.component';
+import { Question } from '../components/question/question.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CircleEl } from '../components/circle-el/circle-el.component';
     PortraitCol,
     PortraitRow,
     CircleEl,
+    Question,
     numberWithLeadingZero
   ],
   imports: [
