@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  public currentPageIndex: number = 1;
+  public currentPageIndex: number = 2;
   public diversityProfile = [];
   public diversityScore: number = 0;
   public appIsReady: boolean = false;
