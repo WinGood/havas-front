@@ -38,6 +38,7 @@
 </div>
 <div
     class="pageContainer pageContainer--briefing pageContainer--withGameScore"
+    (click)="nextStep()"
     *ngIf="currentPageIndex === 1">
   <div class="pageContainer__header">
     <hr class="horizontalDottedDelimiter" />
@@ -57,7 +58,7 @@
           [triggerFlipAnimation]="portrait.flip">
       </portrait-col>
     </portrait-row>
-    <div class="circleWrapper">
+    <circle-el [longDelayAnimation]="true">
       <div class="circleContainer">
         <div class="circleContainer__inner">
           <div class="circleContainer__outerBorder">
@@ -68,7 +69,8 @@
               <div class="circleContainer__text">
                 <p>
                   Please look at the following screens to see if any of the
-                  patient characteristics described t the pro le of patients in
+                  patient characteristics described t the pro le of patients
+                  in
                   your care.
                 </p>
                 <p>
@@ -81,13 +83,13 @@
                 </p>
               </div>
               <div class="circleContainer__logoContainer">
-                <img src="assets/logo.png" />
+                <img src="assets/logo.png"/>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </circle-el>
   </div>
   <div class="pageContainer__footer pageContainer__footer--withoutRefInfo">
     <hr class="horizontalDottedDelimiter" />
@@ -149,7 +151,8 @@
     <hr class="horizontalDottedDelimiter" />
   </div>
   <div class="pageContainer__content">
-    <div class="circleWrapper circleWrapper--сongratulations">
+    <circle-el [shortDelayAnimation]="true"
+               class="сongratulations">
       <div class="circleContainer">
         <div class="circleContainer__inner">
           <div class="circleContainer__outerBorder">
@@ -167,13 +170,13 @@
                 </p>
               </div>
               <div class="circleContainer__logoContainer">
-                <img src="assets/logo.png" />
+                <img src="assets/logo.png"/>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </circle-el>
     <div class="answersCompareContainer">
       <div class="answersCompareContainer__btn" (click)="nextStep()">
         See how your answers compare<br>with those of your colleagues
@@ -255,7 +258,7 @@
       </tr>
       <tr class="gameResultsTable__result gameResultsTable__result--myResult">
         <td class="gameResultsTable__resultPlace gameResultsTable__resultPlace--myResult">
-          <div class="circleWrapper">
+          <circle-el [shortDelayAnimation]="true">
             <div class="circleContainer">
               <div class="circleContainer__inner">
                 <div class="circleContainer__outerBorder">
@@ -268,7 +271,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </circle-el>
         </td>
         <td>
           <div class="gameResultsTable__patients">

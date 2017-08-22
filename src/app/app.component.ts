@@ -230,9 +230,8 @@ export class AppComponent {
     clearInterval(this.flipAnimationIntervalId);
 
     setTimeout(() => {
-      console.log('timeout');
       this.flipAnimation();
-    }, 6200);
+    }, 6000);
   }
 
   private flipAnimation() {
@@ -242,7 +241,6 @@ export class AppComponent {
       const indexes = this.getFlipStartEndIndexes(portraitCount);
       const firstInd = this.getPortraintByIndex(indexes[0]);
       const secondInd = this.getPortraintByIndex(indexes[1]);
-      console.log(indexes, firstInd, secondInd);
 
       const firstPortrait = this.portraitRows[firstInd[0]][firstInd[1]];
       const secondPortrait = this.portraitRows[secondInd[0]][secondInd[1]];

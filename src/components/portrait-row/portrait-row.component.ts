@@ -23,12 +23,5 @@ export class PortraitRow {
                 this.el.nativeElement.className += ' fade-animate';
             }
         }, delay);
-
-        setTimeout(() => {
-            if (this.el.nativeElement) {
-                this.el.nativeElement.className += ' flip-animation';
-                this.el.nativeElement.classList.remove('fade-animate');
-            }
-        }, 3700);
     }
 }
