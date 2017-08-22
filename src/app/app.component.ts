@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  public currentPageIndex: number = 0;
+  public currentPageIndex: number = 1;
   public diversityProfile = [];
   public diversityScore: number = 0;
   public appIsReady: boolean = false;
@@ -24,6 +24,41 @@ export class AppComponent {
     'equalizer.png', 'logo.png'
   ];
 
+  public portraitRows = [];
+
+  private generatePortraitsRow() {
+    let result = [];
+    let portraitsInRow = 8;
+    let currentQuestionIndex = 1;
+    let currentQuestionPortrainIndex = 0;
+    let rows = 3;
+
+    for (let i = 0; i < rows; i++) {
+      let columns = [];
+
+      for (let j = 0; j < portraitsInRow; j++) {
+        currentQuestionPortrainIndex += 1;
+
+        if (currentQuestionPortrainIndex === 4) {
+          currentQuestionIndex += 1;
+          currentQuestionPortrainIndex = 1;
+        }
+
+        columns[j] = {
+          frontImage: `assets/p${currentQuestionIndex}_${currentQuestionPortrainIndex}.jpg`,
+          backImage: `assets/p${currentQuestionIndex}_${currentQuestionPortrainIndex}.jpg`,
+          flip: false
+        };
+      }
+
+      result[i] = columns;
+    }
+
+    return result;
+  }
+
+  private flipAnimationTimeoutId: number;
+  private flipAnimationIntervalId: number;
   private countOfLoadedImages: number = 0;
   private currentQuestionIndex: number = 0;
   private questions = [{
@@ -172,12 +207,89 @@ export class AppComponent {
     }]
   }];
 
+  constructor() {
+    this.portraitRows = this.generatePortraitsRow();
+  }
+
   get question() {
     return this.questions[this.currentQuestionIndex];
   }
   
   get hasSelectedAnswers() {
     return this.question.answers.some(question => question.selected === true);
+  }
+
+  ngOnInit() {
+    if (this.currentPageIndex === 1) {
+      this.startFlipAnimation();
+    }
+  }
+
+  private startFlipAnimation() {
+    clearTimeout(this.flipAnimationTimeoutId);
+    clearInterval(this.flipAnimationIntervalId);
+
+    setTimeout(() => {
+      console.log('timeout');
+      this.flipAnimation();
+    }, 6200);
+  }
+
+  private flipAnimation() {
+    let portraitCount = this.portraitRows.reduce((sum, row) => sum + row.length, 0);
+    
+    this.flipAnimationIntervalId = setInterval(() => {
+      const indexes = this.getFlipStartEndIndexes(portraitCount);
+      const firstInd = this.getPortraintByIndex(indexes[0]);
+      const secondInd = this.getPortraintByIndex(indexes[1]);
+      console.log(indexes, firstInd, secondInd);
+
+      const firstPortrait = this.portraitRows[firstInd[0]][firstInd[1]];
+      const secondPortrait = this.portraitRows[secondInd[0]][secondInd[1]];
+
+      if (firstPortrait.flip === false) {
+        firstPortrait.backImage = (secondPortrait.flip) ? secondPortrait.backImage : secondPortrait.frontImage;
+      } else {
+        firstPortrait.frontImage = (secondPortrait.flip) ? secondPortrait.backImage : secondPortrait.frontImage;
+      }
+
+      if (secondPortrait.flip === false) {
+        secondPortrait.backImage = (firstPortrait.flip) ? firstPortrait.backImage : firstPortrait.frontImage;
+      } else {
+        secondPortrait.frontImage = (firstPortrait.flip) ? firstPortrait.backImage : firstPortrait.frontImage;
+      }
+
+      firstPortrait.flip = !firstPortrait.flip;
+      secondPortrait.flip = !secondPortrait.flip;
+
+    }, 1500);
+  }
+
+  private getPortraintByIndex(index: number) {
+    const portraitInRow = this.portraitRows[0].length;
+    const rowsCount = this.portraitRows.length;
+    const row = Math.abs((Math.ceil(index / portraitInRow)));
+    const rowIndex = row > rowsCount ? rowsCount : row;
+    const maxValue = rowIndex * portraitInRow;
+    const minValue = (maxValue - portraitInRow) < 0 ? 0 : maxValue - portraitInRow;
+    const columnIndex = index - minValue;
+
+    return [(rowIndex !== 0) ? rowIndex - 1 : rowIndex, (columnIndex !== 0) ? columnIndex - 1 : columnIndex];
+  }
+
+  private getFlipStartEndIndexes(end: number) {
+    let flipStartIndex = this.getRandomNumber(end);
+    let flipEndIndex = this.getRandomNumber(end);
+
+    do {
+      flipEndIndex = this.getRandomNumber(end);
+    } while(flipStartIndex === flipEndIndex);
+
+    return [flipStartIndex, flipEndIndex];
+  }
+
+  private getRandomNumber(end: number) {
+    return Math.floor(Math.random() * end);
   }
   
   nextQuestion() {
@@ -206,7 +318,13 @@ export class AppComponent {
   }
   
   nextStep() {
-    this.currentPageIndex += 1; 
+    clearTimeout(this.flipAnimationTimeoutId);
+    clearInterval(this.flipAnimationIntervalId);
+
+    this.currentPageIndex += 1;
+    if (this.currentPageIndex === 1) {
+      this.startFlipAnimation();
+    }
   }
 
   resetGame() {

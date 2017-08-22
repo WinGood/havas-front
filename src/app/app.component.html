@@ -37,67 +37,26 @@
   </div>
 </div>
 <div
-    (click)="nextStep()"
     class="pageContainer pageContainer--briefing pageContainer--withGameScore"
     *ngIf="currentPageIndex === 1">
   <div class="pageContainer__header">
     <hr class="horizontalDottedDelimiter" />
   </div>
   <div class="pageContainer__content pageContainer__content--withoutBg">
-    <div class="portraitRow portraitRow--first">
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_1.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_2.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p1_3.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p2_1.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p2_2.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p2_3.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p3_1.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p3_2.jpg)'}"></div>
-    </div>
-    <div class="portraitRow portraitRow--second">
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p3_1.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p4_1.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p4_2.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p4_3.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p5_1.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p5_2.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p5_3.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p6_1.jpg)'}"></div>
-    </div>
-    <div class="portraitRow portraitRow--third">
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p6_2.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p6_3.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p7_1.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p7_2.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p7_3.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p8_1.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p8_2.jpg)'}"></div>
-      <div class="portraitRow__col"
-           [ngStyle]="{'background-image': 'url(assets/p8_3.jpg)'}"></div>
-    </div>
+    <portrait-row
+        *ngFor="let row of portraitRows; let rowIdx = index"
+        [portraitsInRow]="row.length"
+        [rowIndex]="rowIdx"
+        [class.first]="rowIdx === 0"
+        [class.second]="rowIdx === 1"
+        [class.third]="rowIdx === 2">
+      <portrait-col
+          *ngFor="let portrait of row"
+          [frontImage]="portrait.frontImage"
+          [backImage]="portrait.backImage"
+          [triggerFlipAnimation]="portrait.flip">
+      </portrait-col>
+    </portrait-row>
     <div class="circleWrapper">
       <div class="circleContainer">
         <div class="circleContainer__inner">

@@ -1,3 +1,5 @@
+@import "../bourbon/bourbon";
+
 $headerHeight: 50px;
 $portraitRowSecond: calc(33.333333% + 10px);
 $portraitRowThird: calc(33.333333% + 33.333333% + 10px);
@@ -15,6 +17,15 @@ $borderWidth: 8px;
   to {
     opacity: 1;
   }
+}
+
+$image-count: 8;
+
+@function nth-origin($total, $n, $amount: 50px) {
+  $i: $n - 1;
+  $mid: ($total - 1) / 2;
+  $m:  $i - $mid;
+  @return $m * $amount * -1;
 }
 
 @mixin fadeInAnimation() {
@@ -319,20 +330,17 @@ $borderWidth: 8px;
   }
 }
 
-.portraitRow {
+portrait-row {
   display: flex;
   position: absolute;
   left: 0;
   right: 0;
   height: 33.333333%;
 
-  &__col {
+  portrait-col {
     width: calc(12.5% - 10px);
-    height: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
     margin-right: 10px;
+    opacity: 0;
 
     &:last-child {
       width: 12.5%;
@@ -340,18 +348,48 @@ $borderWidth: 8px;
     }
   }
 
-  &--first {
+  &.first {
     top: 0;
   }
 
-  &--second {
+  &.second {
     top: $portraitRowSecond;
     height: $portraitRowHeight;
   }
 
-  &--third {
+  &.third {
     top: $portraitRowThird;
     height: $portraitRowHeight;
+  }
+
+  &.flip-animation {
+    portrait-col {
+      opacity: 1;
+      //transition: 0.2s all ease-in-out;
+      //transform: rotatey(180deg);
+    }
+  }
+
+  &.fade-animate {
+    portrait-col {
+      @for $i from 1 through 8 {
+        &:nth-of-type( #{$i} ) {
+          @include transform-origin( nth-origin($image-count, $i, 230px) );
+          @include animation(fadeIn 1.5s 0.1s*$i forwards cubic-bezier(0,0.8,0.4,1));
+          //@include keyframes(fadeIn) {
+          //  0% {
+          //    opacity: 0;
+          //    @include transform(scale(0.3));
+          //  }
+          //
+          //  100% {
+          //    opacity: 1;
+          //    @include transform(scale(1));
+          //  }
+          //}
+        }
+      }
+    }
   }
 }
 

@@ -1,0 +1,6 @@
+<div class="portraitCol">
+  <div class="portraitCol__wrapper" [@flipState]="flip">
+    <div class="portraitCol__side portraitCol__side--front" [ngStyle]="{'background-image': 'url(' + frontImage + ')'}"></div>
+    <div class="portraitCol__side portraitCol__side--back" [ngStyle]="{'background-image': 'url(' + backImage + ')'}"></div>
+  </div>
+</div>

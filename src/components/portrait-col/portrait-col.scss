@@ -1,0 +1,30 @@
+@import "../../bourbon/bourbon";
+
+.portraitCol {
+  width: 100%;
+  height: 100%;
+  perspective: 800px;
+
+  &__wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+  }
+
+  &__side {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    backface-visibility: hidden;
+    user-select: none;
+
+    &--back {
+      transform: rotateY(179.9deg);
+    }
+  }
+}
