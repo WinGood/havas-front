@@ -108,7 +108,7 @@
       <div class="answersContainer" [class.answersContainer--hasSelectedAnswer]="hasSelectedAnswers">
         <div class="answer" *ngFor="let answer of question.answers; let index = index" [class.answer--selected]="answer.selected" (click)="toggleSelected(answer, index)">
           <div class="answer__portrait">
-            <img [src]="answer.portrait" />
+            <img src="assets/{{answer.portrait}}" />
           </div>
           <div class="answer__desc">
             <p class="answer__selectedText">Selected</p>
@@ -126,7 +126,8 @@
     <div class="diversityProfile" [hidden]="diversityProfile.length === 0">
       <p class="diversityProfile__text">Your diversity profile</p>
       <div class="diversityProfile__portraitContainer">
-        <img *ngFor="let profile of diversityProfile" [src]="profile" class="diversityProfile__portrait">
+        <img *ngFor="let profile of diversityProfile" src="assets/{{profile}}"
+             class="diversityProfile__portrait">
       </div>
     </div>
     <div class="diversityScore">
@@ -209,52 +210,13 @@
       </tr>
       </thead>
       <tbody>
-      <tr class="gameResultsTable__result">
-        <td class="gameResultsTable__resultPlace">1st</td>
-        <td>
-          <div
-              class="gameResultsTable__patients gameResultsTable__patients--score27">
-            <div><img src="../assets/p1_1.jpg" /></div>
-            <div><img src="../assets/p1_2.jpg" /></div>
-            <div><img src="../assets/p1_3.jpg" /></div>
-            <div><img src="../assets/p1_1.jpg" /></div>
-            <div><img src="../assets/p1_2.jpg" /></div>
-            <div><img src="../assets/p1_3.jpg" /></div>
-            <div><img src="../assets/p1_1.jpg" /></div>
-            <div><img src="../assets/p1_2.jpg" /></div>
-            <div><img src="../assets/p1_3.jpg" /></div>
-            <div><img src="../assets/p1_1.jpg" /></div>
-            <div><img src="../assets/p1_2.jpg" /></div>
-            <div><img src="../assets/p1_3.jpg" /></div>
-            <div><img src="../assets/p1_1.jpg" /></div>
-            <div><img src="../assets/p1_2.jpg" /></div>
-            <div><img src="../assets/p1_3.jpg" /></div>
-            <div><img src="../assets/p1_1.jpg" /></div>
-            <div><img src="../assets/p1_2.jpg" /></div>
-            <div><img src="../assets/p1_3.jpg" /></div>
-          </div>
-        </td>
-        <td class="gameResultsTable__resultScore">29</td>
-      </tr>
-      <tr class="gameResultsTable__result">
-        <td class="gameResultsTable__resultPlace">9th</td>
-        <td>
-          <div
-              class="gameResultsTable__patients gameResultsTable__patients--score12">
-            <div><img src="../assets/p1_1.jpg" /></div>
-            <div><img src="../assets/p1_2.jpg" /></div>
-            <div><img src="../assets/p1_3.jpg" /></div>
-            <div><img src="../assets/p1_1.jpg" /></div>
-            <div><img src="../assets/p1_2.jpg" /></div>
-            <div><img src="../assets/p1_3.jpg" /></div>
-            <div><img src="../assets/p1_1.jpg" /></div>
-            <div><img src="../assets/p1_2.jpg" /></div>
-          </div>
-        </td>
-        <td class="gameResultsTable__resultScore">12</td>
-      </tr>
-      <tr class="gameResultsTable__result gameResultsTable__result--myResult">
-        <td class="gameResultsTable__resultPlace gameResultsTable__resultPlace--myResult">
+      <tr class="gameResultsTable__result"
+          [class.gameResultsTable__result--myResult]="result.isMy"
+          *ngFor="let result of playerResults; let ind = index;">
+        <td class="gameResultsTable__resultPlace" *ngIf="!result.isMy">{{ind
+          + 1 | numberWithSuffix}}</td>
+        <td
+            class="gameResultsTable__resultPlace gameResultsTable__resultPlace--myResult" *ngIf="result.isMy">
           <circle-el [shortDelayAnimation]="true">
             <div class="circleContainer">
               <div class="circleContainer__inner">
@@ -263,7 +225,7 @@
                     <h3 class="circleContainer__heading">
                       You
                     </h3>
-                    <div class="circleContainer__text">10th</div>
+                    <div class="circleContainer__text">{{ind + 1 | numberWithSuffix}}</div>
                   </div>
                 </div>
               </div>
@@ -271,28 +233,14 @@
           </circle-el>
         </td>
         <td>
-          <div class="gameResultsTable__patients gameResultsTable__patients--score9">
-            <div><img src="../assets/p1_1.jpg" /></div>
-            <div><img src="../assets/p1_2.jpg" /></div>
-            <div><img src="../assets/p1_3.jpg" /></div>
-            <div><img src="../assets/p1_1.jpg" /></div>
-            <div><img src="../assets/p1_2.jpg" /></div>
-          </div>
-        </td>
-        <td class="gameResultsTable__resultScore">9</td>
-      </tr>
-      <tr class="gameResultsTable__result">
-        <td class="gameResultsTable__resultPlace">11th</td>
-        <td>
           <div
-              class="gameResultsTable__patients gameResultsTable__patients--score8">
-            <div><img src="../assets/p1_1.jpg" /></div>
-            <div><img src="../assets/p1_2.jpg" /></div>
-            <div><img src="../assets/p1_3.jpg" /></div>
-            <div><img src="../assets/p1_1.jpg" /></div>
+              class="gameResultsTable__patients gameResultsTable__patients--score{{result.score}}">
+            <div *ngFor="let patient of result.patients">
+              <img src="../assets/{{patient}}"/>
+            </div>
           </div>
         </td>
-        <td class="gameResultsTable__resultScore">8</td>
+        <td class="gameResultsTable__resultScore">{{result.score}}</td>
       </tr>
       </tbody>
     </table>
