@@ -15,6 +15,7 @@ export class AppComponent {
   public questionIsReady: boolean = false;
   public portraitRows = [];
   public playerResults = [];
+  public playerResultsWasLoaded: boolean;
   public preloadImagesList = [
     'p1_1.jpg', 'p1_2.jpg', 'p1_3.jpg',
     'p2_1.jpg', 'p2_2.jpg', 'p2_3.jpg',
@@ -277,15 +278,31 @@ export class AppComponent {
   private getPlayersResults() {
     const currentPlayerResult = {
       score: this.diversityScore,
+      displayedScore: 0,
       patients: this.diversityProfile,
       isMy: true
     };
 
-    this.apiService.getResultsOfPlayers().subscribe(data => {
+    this.playerResultsWasLoaded = false;
+
+    this.apiService.getResultsOfPlayers().subscribe(results => {
+      const data  = results.map(res => {
+        res.displayedScore = 0;
+        return res;
+      });
+
       const array = data.concat([currentPlayerResult]);
 
+      this.playerResultsWasLoaded = true;
       this.playerResults = array.sort((prev, next) => next.score - prev.score);
-      // TODO save currentPlayerResult to the api
+
+      if (currentPlayerResult.score > 0) {
+        this.apiService.saveResultOfPlayer(currentPlayerResult).subscribe(result => {
+          console.log(result);
+        }, err => {
+          console.log(err);
+        });
+      }
     });
   }
 

@@ -41,7 +41,7 @@
   <div class="pageContainer__header">
     <hr class="horizontalDottedDelimiter" />
   </div>
-  <div class="pageContainer__content pageContainer__content--withoutBg">
+  <div class="pageContainer__content">
     <portrait-row
         *ngFor="let row of portraitRows; let rowIdx = index"
         [portraitsInRow]="row.length"
@@ -99,7 +99,8 @@
   <div class="pageContainer__header">
     <hr class="horizontalDottedDelimiter" />
   </div>
-  <div class="pageContainer__content">
+  <div class="pageContainer__content"
+       [ngStyle]="{'background-image': 'url(assets/equalizer.png)'}">
     <div class="pageLogo" (click)="resetQuiz()">
       <img src="assets/logo.png" />
     </div>
@@ -146,7 +147,7 @@
   <div class="pageContainer__header">
     <hr class="horizontalDottedDelimiter" />
   </div>
-  <div class="pageContainer__content">
+  <div class="pageContainer__content" [ngStyle]="{'background-image': 'url(assets/equalizer.png)'}">
     <circle-el [shortDelayAnimation]="true"
                class="сongratulations">
       <div class="circleContainer">
@@ -195,16 +196,22 @@
   <div class="pageContainer__header">
     <hr class="horizontalDottedDelimiter" />
   </div>
-  <div class="pageContainer__content pageContainer__content--withoutBg"
+  <div class="pageContainer__content"
        (click)="resetGame()">
     <div class="gameResultsHeading">
       <span>How your answers compare<br>to your colleagues</span>
     </div>
-    <table class="gameResultsTable" width="100%" cellpadding="0"
+    <div *ngIf="!playerResultsWasLoaded" class="gameResultsTableLoader">
+      <span>Loading...</span>
+    </div>
+    <table *ngIf="playerResultsWasLoaded"
+           class="gameResultsTable"
+           width="100%"
+           cellpadding="0"
            cellspacing="0">
       <thead>
       <tr>
-        <th width="15%">Position</th>
+        <th width="14%">Position</th>
         <th>Patients</th>
         <th width="20%">Diversity score</th>
       </tr>
@@ -240,7 +247,15 @@
             </div>
           </div>
         </td>
-        <td class="gameResultsTable__resultScore">{{result.score}}</td>
+        <td class="gameResultsTable__resultScore"
+            counto
+            [step]="100"
+            [countTo]="result.score"
+            [countFrom]="0"
+            [duration]="50"
+            (countoChange)="result.displayedScore = $event">
+          {{result.displayedScore}}
+        </td>
       </tr>
       </tbody>
     </table>

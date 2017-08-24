@@ -1,21 +1,40 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Response, Http } from "@angular/http";
+import { Observable } from 'rxjs/Observable';
+import { environment } from '../environments/environment';
+
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ApiService {
-    getResultsOfPlayers() {
-        return new BehaviorSubject<any>([{
-            patients: ['p1_1.jpg', 'p1_2.jpg', 'p1_3.jpg', 'p2_1.jpg', 'p2_2.jpg'],
-            score: 5
-        }, {
-            patients: ['p1_1.jpg', 'p1_2.jpg', 'p1_3.jpg', 'p2_2.jpg'],
-            score: 4
-        }, {
-            patients: ['p1_1.jpg', 'p2_1.jpg', 'p2_2.jpg'],
-            score: 3
-        }, {
-            patients: ['p2_1.jpg', 'p2_2.jpg'],
-            score: 2
-        }]);
+    private apiUrl: string = 'http://localhost:8000';
+    
+    constructor(private http: Http) {
+        if (environment.production) {
+            this.apiUrl = 'http://46.101.61.67';
+        }
+    }
+
+    getResultsOfPlayers(): Observable<any> {
+        return this.http.get(this.apiUrl + '/getResults.php')
+          .map(this.extractData);
+    }
+
+    saveResultOfPlayer(result: {score: number, patients: any[]}) {
+        const patients = result.patients.join(',');
+        return this.http.get(this.apiUrl + `/saveResult.php?score=${result.score}&patients=${patients}`);
+    }
+
+    private extractData(res: Response) {
+        let body = res.json();
+        
+        if (body && body.length > 0) {
+            return body.map(record => {
+                record['patients'] = record['patients'].split(',');
+                return record;
+            });
+        }
+        
+        return [];
     }
 }
