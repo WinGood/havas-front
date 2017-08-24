@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
+
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -180,7 +183,11 @@ export class AppComponent {
     }]
   }];
 
-  constructor(private apiService: ApiService) {
+  constructor(
+    private apiService: ApiService,
+    private pageScrollService: PageScrollService, 
+    @Inject(DOCUMENT) private document: any
+  ) {
     this.portraitRows = this.generatePortraitsRow();
   }
 
@@ -221,16 +228,18 @@ export class AppComponent {
     }
   }
 
-  toggleSelected(answer, index) {
-    const currentValue = !this.question.answers[index].selected;
-    this.question.answers[index].selected = currentValue;
-    
-    if (currentValue) {
+  toggleSelected(answer) {
+    answer.selected = !answer.selected;
+
+    if (answer.selected) {
       this.diversityScore += 1;
       this.diversityProfile.push(answer.portrait);
     } else {
-      this.diversityScore -= 1;
-      this.diversityProfile.pop();
+      const findedIndex = this.diversityProfile.indexOf(answer.portrait);
+      if (findedIndex !== -1) {
+        this.diversityScore -= 1;
+        this.diversityProfile.splice(findedIndex, 1);
+      }
     }
   }
   
@@ -295,6 +304,11 @@ export class AppComponent {
 
       this.playerResultsWasLoaded = true;
       this.playerResults = array.sort((prev, next) => next.score - prev.score);
+
+      setTimeout(() => {
+        let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({document: this.document, scrollTarget: '.gameResultsTable__result--myResult', verticalScrolling: true});
+        this.pageScrollService.start(pageScrollInstance);
+      }, 1000);
 
       if (currentPlayerResult.score > 0) {
         this.apiService.saveResultOfPlayer(currentPlayerResult).subscribe(result => {

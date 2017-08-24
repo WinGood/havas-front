@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CountoModule } from 'angular2-counto';
+import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { HttpModule } from "@angular/http";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -31,6 +32,7 @@ import { Question } from '../components/question/question.component';
     AppRoutingModule,
     HttpModule,
     BrowserAnimationsModule,
+    Ng2PageScrollModule,
     CountoModule
   ],
   providers: [ApiService],

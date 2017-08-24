@@ -107,7 +107,7 @@
     <div class="quizContainer">
       <question [question]="question"></question>
       <div class="answersContainer" [class.answersContainer--hasSelectedAnswer]="hasSelectedAnswers">
-        <div class="answer" *ngFor="let answer of question.answers; let index = index" [class.answer--selected]="answer.selected" (click)="toggleSelected(answer, index)">
+        <div class="answer" *ngFor="let answer of question.answers; let index = index" [class.answer--selected]="answer.selected" (click)="toggleSelected(answer)">
           <div class="answer__portrait">
             <img src="assets/{{answer.portrait}}" />
           </div>
@@ -220,10 +220,10 @@
       <tr class="gameResultsTable__result"
           [class.gameResultsTable__result--myResult]="result.isMy"
           *ngFor="let result of playerResults; let ind = index;">
-        <td class="gameResultsTable__resultPlace" *ngIf="!result.isMy">{{ind
-          + 1 | numberWithSuffix}}</td>
-        <td
-            class="gameResultsTable__resultPlace gameResultsTable__resultPlace--myResult" *ngIf="result.isMy">
+        <td class="gameResultsTable__resultPlace" *ngIf="!result.isMy">
+          {{ind + 1 | numberWithSuffix}}
+        </td>
+        <td class="gameResultsTable__resultPlace gameResultsTable__resultPlace--myResult" *ngIf="result.isMy">
           <circle-el [shortDelayAnimation]="true">
             <div class="circleContainer">
               <div class="circleContainer__inner">
