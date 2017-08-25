@@ -259,6 +259,9 @@
       </tr>
       </tbody>
     </table>
+    <button class="topButton" (click)="goToTop($event)" *ngIf="showGoToTopButton">
+      <img src="assets/top-icon.png" />
+    </button>
   </div>
   <div class="pageContainer__footer">
     <hr class="horizontalDottedDelimiter" />

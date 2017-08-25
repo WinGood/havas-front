@@ -1,8 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
+import { PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
 
 import { ApiService } from '../services/api.service';
+
+declare var window;
+declare var document;
 
 @Component({
   selector: 'app-root',
@@ -11,7 +14,7 @@ import { ApiService } from '../services/api.service';
 })
 
 export class AppComponent {
-  public currentPageIndex: number = 0;
+  public currentPageIndex: number = 4;
   public diversityProfile = [];
   public diversityScore: number = 0;
   public appIsReady: boolean = false;
@@ -19,6 +22,7 @@ export class AppComponent {
   public portraitRows = [];
   public playerResults = [];
   public playerResultsWasLoaded: boolean;
+  public showGoToTopButton: boolean = false;
   public preloadImagesList = [
     'p1_1.jpg', 'p1_2.jpg', 'p1_3.jpg',
     'p2_1.jpg', 'p2_2.jpg', 'p2_3.jpg',
@@ -189,6 +193,18 @@ export class AppComponent {
     @Inject(DOCUMENT) private document: any
   ) {
     this.portraitRows = this.generatePortraitsRow();
+    window.onscroll = () => {
+      if (this.currentPageIndex === 4) {
+        let scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollPos >= 400 && this.showGoToTopButton === false) {
+          this.showGoToTopButton = true;
+        }
+
+        if (scrollPos <= 400 && this.showGoToTopButton === true) {
+          this.showGoToTopButton = false;
+        }
+      }
+    }
   }
 
   get question() {
@@ -273,6 +289,7 @@ export class AppComponent {
 
   resetGame() {
     this.currentPageIndex = 0;
+    this.showGoToTopButton = false;
     this.resetQuiz();
   }
   
@@ -282,6 +299,12 @@ export class AppComponent {
     if (this.countOfLoadedImages === this.preloadImagesList.length) {
       this.appIsReady = true;
     }
+  }
+  
+  goToTop(event) {
+    event.stopPropagation();
+    let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({document: this.document, scrollTarget: '.pageContainer', verticalScrolling: true, pageScrollDuration: 600});
+    this.pageScrollService.start(pageScrollInstance); 
   }
 
   private getPlayersResults() {
