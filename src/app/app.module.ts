@@ -7,7 +7,6 @@ import { HttpModule } from "@angular/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { WelcomePage } from '../pages/welcome/welcome';
 import { numberWithLeadingZero } from '../pipes/leading-zero';
 import { numberWithSuffix } from '../pipes/number-suffix';
 import { ApiService } from '../services/api.service';
@@ -19,7 +18,6 @@ import { Question } from '../components/question/question.component';
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomePage,
     PortraitCol,
     PortraitRow,
     CircleEl,

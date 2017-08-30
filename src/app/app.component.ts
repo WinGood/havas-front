@@ -14,7 +14,7 @@ declare var document;
 })
 
 export class AppComponent {
-  public currentPageIndex: number = 4;
+  public currentPageIndex: number = 0;
   public diversityProfile = [];
   public diversityScore: number = 0;
   public appIsReady: boolean = false;
